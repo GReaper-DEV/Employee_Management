@@ -15,7 +15,7 @@
             <input formControlName="email" matInput placeholder="Email">
             <mat-hint>{{'xxxx@xxxx.com'}}</mat-hint>
             <mat-error *ngIf="email?.hasError('required')">Email is required</mat-error>
-            <mat-error *ngIf="email?.hasError('email')">Please type a valid email.</mat-error>
+            <mat-error *ngIf="email?.hasError('pattern')">Please type a valid email.</mat-error>
 
         </mat-form-field>
         <mat-form-field appearance="outline">
