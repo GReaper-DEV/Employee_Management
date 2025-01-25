@@ -1,0 +1,26 @@
+{
+  "name": "employeemanagement",
+  "version": "1.0.0",
+  "description": "A backend for employee management using Nodejs, Express, MySQL",
+  "license": "ISC",
+  "author": "Ioannis Kotsonis",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "node server.js"
+  },
+  "dependencies": {
+    "@fakerjs/float": "^2.1.1",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mysql2": "^3.12.0",
+    "sequelize": "^6.37.5"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.4.0",
+    "sequelize-cli": "^6.6.2"
+  }
+}

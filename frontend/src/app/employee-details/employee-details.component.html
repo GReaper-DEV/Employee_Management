@@ -1,0 +1,20 @@
+<div *ngIf="employee">
+  <h2 mat-dialog-title>Employee: {{employee.name}}</h2>
+  <mat-dialog-content>
+    <div class="profile-pic-container">
+      <img src="assets/images/profile_image.webp" alt="profile_image" />
+      <p class="employee-name">{{employee.name}}</p>
+      <p class="employee-position">{{employee.position}}</p>
+    </div>
+    <div class="mat-dialog-content-employee-details">
+      <div class="mdced-inner">
+        <div><span class="mdced-label">ID:</span><span class="mdced-value">{{employee.id}}</span></div>
+        <div><span class="mdced-label">Email:</span><span class="mdced-value">{{employee.email}}</span></div>
+        <div><span class="mdced-label">Salary:</span><span class="mdced-value">{{employee.salary | currency: 'EUR':'symbol'}}</span></div>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="">Ok</button>
+  </mat-dialog-actions>
+</div>

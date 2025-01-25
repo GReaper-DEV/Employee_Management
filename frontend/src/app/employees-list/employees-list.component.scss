@@ -1,0 +1,20 @@
+.see_details{
+    color: #2B6CB0;
+    
+}
+.see_details:hover{
+    color: #7ca5d1;
+    text-decoration: underline;
+    cursor: pointer;
+}
+$primary-text-color: #000;
+$secondary-text-color: #fff;
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.navbar-title{
+    color: $secondary-text-color;
+    font-weight: 500;
+}

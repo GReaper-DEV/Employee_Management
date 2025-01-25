@@ -1,0 +1,5 @@
+/* You can add global styles to this file, and also import other style files */
+@use './styles/material-table-override';
+
+html, body { height: 100%; }
+body { margin: 0 auto; font-family: Roboto, "Helvetica Neue", sans-serif; padding: 20px; max-width: 1024px; }

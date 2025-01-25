@@ -1,0 +1,32 @@
+.mat-success {
+    background-color: #3D7EC5;
+    color: #fff;
+}
+.mat-success:hover {
+    background-color: #82b1e2;
+    color: #fff;
+}
+.mat-warn {
+    background-color: #cc3300;
+    color: #fff;
+}
+button.warn:hover {
+    background-color: #e63d05;
+    color: #fff;
+}
+.create-update-form-container > form {
+    display: grid;
+    gap: 20px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+}
+
+.create-update-form-container {
+    padding: 0 30px 20px;
+}
+
+.create-update-form-container .mat-mdc-dialog-actions{
+    padding: 0;
+}

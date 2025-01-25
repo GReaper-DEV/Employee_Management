@@ -1,0 +1,32 @@
+.profile-pic-container img {
+    border-radius: 50%;
+    border: 2px solid #1e2939;
+    margin: 0px auto 20px;
+    display: flex;
+}
+.profile-pic-container p.employee-name {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 500;
+}
+.profile-pic-container p {
+    margin: 5px 0;
+}
+.profile-pic-container p.employee-position {
+    text-align: center;
+    font-size: 16px;
+}
+.mdced-inner {
+    max-width: 410px;
+    margin: 30px auto 0;
+}
+.mdced-inner > div{
+    border-bottom: 1px solid gainsboro;
+    padding: 5px 0;
+
+}
+.mdced-inner > div .mdced-label{
+    font-weight: 500;
+    min-width: 70px;
+    display: inline-block;
+}

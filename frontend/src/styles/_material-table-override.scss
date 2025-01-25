@@ -1,0 +1,25 @@
+@use '@angular/material' as mat;
+
+
+@include mat.table-overrides((
+    row-item-outline-width: 1px,
+    row-item-outline-color: #e3e3e3
+));
+
+@include mat.toolbar-overrides((
+    container-background-color: #1e2939
+));
+
+@include mat.button-overrides((
+    filled-container-color: #fff,
+    filled-label-text-color: #fff
+));
+
+.mat-mdc-table{
+    border: 1px solid #e3e3e3 !important;
+}
+
+.mdc-button.mat-mdc-button.mat-unthemed.mat-mdc-button-base{
+    background-color: #fff;
+    color: #000;
+}
