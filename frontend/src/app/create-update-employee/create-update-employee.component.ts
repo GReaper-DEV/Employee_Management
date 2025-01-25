@@ -18,7 +18,6 @@ import { NgIf } from '@angular/common';
 export class CreateUpdateEmployeeComponent implements OnInit {
   isUpdate: boolean = false;
   employeeForm!: FormGroup;
-  error_text: string = '';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -64,31 +63,28 @@ export class CreateUpdateEmployeeComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.error_text)
     const formValues = this.employeeForm.value;
 
     if (this.employeeForm.invalid) return;
 
-    if (this.data && this.data.id) {
-      this.apiService.updateEmployee(formValues, this.data.id).subscribe(
+    const { id } = this.data || {};
+
+    if (id) {
+      this.apiService.updateEmployee(formValues, id).subscribe(
         {
           next: (data) => {
             this.dialogRef.close(data); //give back the updated Employee
           },
-          error: (error) => { 
-            this.error_text = error;
-           },
+          error: (error) => console.error(error),
           complete: () => { }
         });
-
-
     } else {
       this.apiService.createEmployee(formValues).subscribe(
         {
           next: (data) => {
             this.dialogRef.close(data);
           },
-          error: (error) => { console.log(error); this.error_text = error },
+          error: (error) => console.error(error),
           complete: () => { }
         });
     }

@@ -108,15 +108,11 @@ const createEmployee = async(req, res) => {
         )
         if (response[0] === 0) return res.status(200).json({ message: 'Something went wrong' });
 
-        res.status(200).json({
-            status: 'success',
-            data: response
-        })
+        res.status(200).json(response)
 
     } catch (error) {
         const err = error.errors[0].message
         res.status(500).json(err)
-
     }
 };
 
