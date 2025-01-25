@@ -52,7 +52,6 @@ export class CreateUpdateEmployeeComponent implements OnInit {
 
   loadEmployeeData(id: number) {
     this.apiService.getEmployee(id).subscribe((employee) => {
-      console.log(employee)
       this.employeeForm.patchValue({
         name: employee.name,
         email: employee.email,
