@@ -4,7 +4,14 @@ const { Employee } = require('../models');
 
 const getEmployees = async (req, res) => {
     try {
-        const employees = await Employee.findAll();
+
+        const { email } = req.query;
+
+        const whereClause = email ? { email } : {};
+
+        const employees = await Employee.findAll({
+            where: whereClause
+        });
         res.status(200).json(employees);
     } catch (error) {
         res.status(500).json({
@@ -101,7 +108,7 @@ const updateEmployee = async (req, res) => {
     }
 }
 
-const createEmployee = async(req, res) => {
+const createEmployee = async (req, res) => {
     try {
         const response = await Employee.create(
             req.body
