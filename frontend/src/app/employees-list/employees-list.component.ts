@@ -10,7 +10,6 @@ import { Employee, EmployeeService } from '../service/employee.service';
 import { EmployeeDetailsComponent } from '../employee-details/employee-details.component';
 import { CreateUpdateEmployeeComponent } from '../create-update-employee/create-update-employee.component';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { Subject } from 'rxjs';
 
 
 @Component({
@@ -26,7 +25,7 @@ export class EmployeesListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'actions', 'see_details'];
   employeesList: Employee[] = [];
 
-  employee: any;
+  employee!: Employee;
 
 
   readonly dialog = inject(MatDialog);
@@ -52,7 +51,6 @@ export class EmployeesListComponent implements OnInit {
 
   openEditDialog(event: MouseEvent, id: number) {
     event.stopPropagation();
-    // this.employee = response;
     const dialogRef = this.dialog.open(CreateUpdateEmployeeComponent, {
       width: '500px',
       data: { id }
@@ -102,7 +100,6 @@ export class EmployeesListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result)
       if (!result) {
         return;
       }
