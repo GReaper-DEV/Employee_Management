@@ -10,11 +10,12 @@ import { Employee, EmployeeService } from '../service/employee.service';
 import { EmployeeDetailsComponent } from '../employee-details/employee-details.component';
 import { CreateUpdateEmployeeComponent } from '../create-update-employee/create-update-employee.component';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { NgIf } from '@angular/common';
 
 
 @Component({
   selector: 'app-employees-list',
-  imports: [MatTableModule, MatIconModule, MatToolbarModule, MatButton],
+  imports: [MatTableModule, MatIconModule, MatToolbarModule, MatButton, NgIf],
   templateUrl: './employees-list.component.html',
   styleUrl: './employees-list.component.scss'
 })
