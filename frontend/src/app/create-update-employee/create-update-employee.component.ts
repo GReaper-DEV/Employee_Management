@@ -7,7 +7,8 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { Employee, EmployeeService } from '../service/employee.service';
 import { NgIf } from '@angular/common';
 import { UniqueEmailService } from '../service/unique-email.service';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { createUpdateEmployeeForm } from './create-update-employee.utils';
 
 
 
@@ -21,6 +22,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 export class CreateUpdateEmployeeComponent implements OnInit {
   isUpdate: boolean = false;
   employeeForm!: FormGroup;
+  employee!: Employee;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -32,39 +34,28 @@ export class CreateUpdateEmployeeComponent implements OnInit {
   ngOnInit(): void {
     const { id } = this.data || {};
 
-    this.employeeForm = new FormGroup({
-      name: new FormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-      ]),
+    this.employeeForm = createUpdateEmployeeForm();
 
-      email: new FormControl('', {
-        validators: [
-          Validators.required,
-          Validators.pattern(/^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)])$/)
-        ],
-        asyncValidators: [this.uniqueEmailService.UniqueEmailValidator()]
-      }),
-      position: new FormControl(''),
-      salary: new FormControl('', [
-        Validators.pattern(/^\d+(\.\d{1,2})?$/)
-      ]),
-    });
-    
     if (id) {
       this.isUpdate = true;
       this.loadEmployeeData(id);
+    } else {
+      // i had a problem with the asyncValidator so i made this [else]
+      this.email?.setAsyncValidators(
+        this.uniqueEmailService.UniqueEmailValidator('')
+      );
     }
   }
 
   loadEmployeeData(id: number) {
+
     this.apiService.getEmployee(id).subscribe((employee) => {
-      this.employeeForm.patchValue({
-        name: employee.name,
-        email: employee.email,
-        position: employee.position,
-        salary: employee.salary
-      })
+      this.employeeForm.patchValue(employee)
+
+      //async validation. use the current employee email, to check in Async Unique Email Validation
+      this.email?.setAsyncValidators(
+        this.uniqueEmailService.UniqueEmailValidator(this.email?.value)
+      );
     })
   }
 
@@ -75,25 +66,15 @@ export class CreateUpdateEmployeeComponent implements OnInit {
 
     const { id } = this.data || {};
 
-    if (id) {
-      this.apiService.updateEmployee(formValues, id).subscribe(
-        {
-          next: (data) => {
-            this.dialogRef.close(data); //give back the updated Employee
-          },
-          error: (error) => console.error(error),
-          complete: () => { }
-        });
-    } else {
-      this.apiService.createEmployee(formValues).subscribe(
-        {
-          next: (data) => {
-            this.dialogRef.close(data);
-          },
-          error: (error) => console.error(error),
-          complete: () => { }
-        });
-    }
+    const request = id ?
+      this.apiService.updateEmployee(formValues, id) :
+      this.apiService.createEmployee(formValues);
+
+    request.subscribe({
+      next: (data) => this.dialogRef.close(data),
+      error: (err) => console.log('error'),
+      complete: () => { }
+    })
   }
 
 

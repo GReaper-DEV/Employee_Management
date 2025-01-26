@@ -95,6 +95,7 @@ export class EmployeesListComponent implements OnInit {
 
   openNewEmployeDialog(event: MouseEvent) {
     event.stopPropagation();
+
     const dialogRef = this.dialog.open(CreateUpdateEmployeeComponent, {
       width: '500px',
     });
