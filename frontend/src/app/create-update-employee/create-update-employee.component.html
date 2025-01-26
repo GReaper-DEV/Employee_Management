@@ -14,8 +14,11 @@
             <mat-label>Email</mat-label>
             <input formControlName="email" matInput placeholder="Email">
             <mat-hint>{{'xxxx@xxxx.com'}}</mat-hint>
+            <mat-spinner matSuffix [diameter]="25" style="right: 10px;" [mode]="'indeterminate'" *ngIf="employeeForm.pending"></mat-spinner>
             <mat-error *ngIf="email?.hasError('required')">Email is required</mat-error>
             <mat-error *ngIf="email?.hasError('pattern')">Please type a valid email.</mat-error>
+            <mat-error *ngIf="email?.hasError('emailExists') && !isUpdate" >This email already exists</mat-error>
+
 
         </mat-form-field>
         <mat-form-field appearance="outline">
@@ -32,8 +35,8 @@
         </mat-form-field>
         <mat-dialog-actions>
             <button mat-button [mat-dialog-close]="" color="warn">Cancel</button>
-            <button *ngIf="isUpdate"  mat-button color="success" >Update</button>
-            <button *ngIf="!isUpdate" mat-button color="success" >Create</button>
+            <button *ngIf="isUpdate" [disabled]="employeeForm.pending || employeeForm.invalid " mat-button color="success" >Update</button>
+            <button *ngIf="!isUpdate" [disabled]="employeeForm.pending || employeeForm.invalid " mat-button color="success" >Create</button>
         </mat-dialog-actions>
     </form>
 </div>
