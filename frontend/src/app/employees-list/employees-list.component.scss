@@ -1,3 +1,7 @@
+$secondary-text-color: #fff;
+
+
+
 .see_details{
     color: #2B6CB0;
     
@@ -7,8 +11,6 @@
     text-decoration: underline;
     cursor: pointer;
 }
-$primary-text-color: #000;
-$secondary-text-color: #fff;
 
 .example-spacer {
     flex: 1 1 auto;
@@ -17,4 +19,14 @@ $secondary-text-color: #fff;
 .navbar-title{
     color: $secondary-text-color;
     font-weight: 500;
+}
+
+@media screen  and (min-width: 300px) and (max-width:500px){
+    .mat-mdc-cell > button:first-child {
+        margin: 5px 0 5px 0;
+    }
+    .mat-mdc-cell > button {
+        margin: 0 0 5px 0
+    }
+
 }
