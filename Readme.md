@@ -24,7 +24,7 @@ A full-stack application for managing employees.
 Clone this repository:
 
 ```bash
-git clone https://github.com/your-repo-url.git
+git clone https://github.com/GReaper-DEV/Employee_Management.git
 cd your-repo-folder
 ```
 
